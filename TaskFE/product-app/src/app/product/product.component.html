@@ -1,0 +1,44 @@
+<mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+  <button mat-icon-button color="accent" (click)="newComponent()">
+    <mat-icon class="mat-18">add</mat-icon>
+</button>
+  <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container> 
+
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
+      <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+    </ng-container>  
+    <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+        <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+      </ng-container> 
+      <ng-container matColumnDef="vendor">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Vendor </th>
+        <td mat-cell *matCellDef="let element"> {{element?.vendor?.name}} </td>
+      </ng-container> 
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+        <td mat-cell *matCellDef="let element"> {{element?.price}} </td>
+      </ng-container>
+      <ng-container matColumnDef="dietaryFlag">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> DietaryFlag </th>
+        <td mat-cell *matCellDef="let element"> {{element?.dietaryFlag?.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="photoName">
+        <th mat-header-cell *matHeaderCellDef> Image </th>
+        <td mat-cell *matCellDef="let element"> 
+          <img class="thubmnial" [src]="element.photoName != null ? element.photoName : 'assets/img/No_image_available.svg'"/> </td>
+      </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>

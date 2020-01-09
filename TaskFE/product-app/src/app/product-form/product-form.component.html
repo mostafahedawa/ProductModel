@@ -1,0 +1,75 @@
+<div class="row" style="margin-bottom:15px;">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)" novalidate>
+        <div class="col-md-3">
+            <mat-form-field appearance="outline">
+                <mat-label>Title</mat-label>
+                <input matInput placeholder="Enter Prodcut Title" formControlName="title" />
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field appearance="outline">
+                <mat-label>Description</mat-label>
+                <input matInput formControlName="description" placeholder="Product Description">
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-3">
+            <mat-form-field appearance="outline">
+                <mat-label>Vendor</mat-label>
+                <mat-select formControlName="VendorID">
+                    <mat-option *ngFor="let vendor of VendorList" [value]="vendor.id">
+                        {{vendor.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-3">
+            <mat-form-field appearance="outline">
+                <mat-label>Dietary Flag</mat-label>
+                <mat-select formControlName="DietaryID">
+                    <mat-option *ngFor="let flag of FlagList" [value]="flag.id">
+                        {{flag.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-3">
+            <mat-form-field appearance="outline">
+                <mat-label>Price</mat-label>
+                <input matInput formControlName="price" placeholder="Product Price">
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+
+            <label>Photo</label>
+            <img [src]="imageUrl" style="width: 200px;height: 200px;">
+
+            <input type="file" #Image accept="image/*" (change)="handleFileInput($event.target.files)"
+                formControlName="photo" placeholder="Product Photo">
+
+            <!-- <input type="file" accept="image/*" (change)="onFileSubmit($event)" formControlName="photoName" placeholder="Product Photo"> -->
+
+        </div>
+        <button type="submit" [disabled]="myForm.invalid">Send</button>
+    </form>
+</div>
+<!-- 
+<div class="example-container">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)" novalidate>
+        <mat-form-field appearance="outline">
+            <mat-label>Title</mat-label>
+            <input matInput placeholder="Enter Prodcut Title" formControlName="title" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <input matInput formControlName="description" placeholder="Product Description">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Price</mat-label>
+            <input matInput formControlName="price" placeholder="Product Price">
+        </mat-form-field>
+        <button type="submit" [disabled]="myForm.invalid">Send</button>
+    </form>
+</div> -->
