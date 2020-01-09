@@ -25,6 +25,10 @@ namespace ProductAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options => options.AddPolicy("AllowAll", p => p.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader()));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                  .AddJsonOptions( options => options.SerializerSettings.ReferenceLoopHandling =        Newtonsoft.Json.ReferenceLoopHandling.Ignore
     );
@@ -33,6 +37,9 @@ namespace ProductAPI
 
             services.AddScoped<IProductRepository, ProductRepositroy>();
             services.AddScoped<IProductService, ProductService>();
+
+            services.AddScoped<ILookupRepository, LookupRepository>();
+            services.AddScoped<ILookupService, LookupService>();
 
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new Info { Title = "Product API", Version = "V1" });
@@ -51,6 +58,7 @@ namespace ProductAPI
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseCors("AllowAll");
             app.UseSwagger();
             app.UseSwaggerUI(c => {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "post API V1");

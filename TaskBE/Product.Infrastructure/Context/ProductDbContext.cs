@@ -16,6 +16,8 @@ namespace Product.Infrastructure.Context
         #region Properties
 
         public DbSet<Products> Products { get; set; }
+        public DbSet<Vendor> Vendor { get; set; }
+        public DbSet<DietaryFlags> DietaryFlags { get; set; }
 
         #endregion Properties
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -19,6 +20,7 @@ namespace Product.Domain.Entities
         public string Description { get; set; }
         public double Price { get; set; }
 
+        public byte[] Photo { set; get; }
         public string PhotoName { get; set; }
 
         public int DietaryID { get; set; }
